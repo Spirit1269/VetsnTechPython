@@ -1,14 +1,22 @@
 import requests
 from openpyxl import Workbook
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load variables from .env into environment
+
+adzuna_app_id = os.getenv("ADZUNA_APP_ID")
+adzuna_app_key = os.getenv("ADZUNA_APP_KEY")
+
 # ✅ Correct Adzuna API Request
 url = "https://api.adzuna.com/v1/api/jobs/us/search/1"
 
 params = {
-    "app_id": "08e49799",  # Replace with your Adzuna app_id
-    "app_key": "7a9887c1e3f68f97dd4e7bc4587a5a08",  # Replace with your Adzuna app_key
+    "app_id": adzuna_app_id,  
+    "app_key": adzuna_app_key,
     "results_per_page": 20,
-    "what": "Software Engineer",  # Combine search terms
+    "what": "Software Engineer",
     "where": "Dallas",
     "max_days_old": 5,
     "content-type": "application/json"
