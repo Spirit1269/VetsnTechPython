@@ -1,6 +1,16 @@
 import openpyxl, json, requests
 from openpyxl import Workbook
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()  # Load variables from .env into environment
+
+adzuna_app_id = os.getenv("ADZUNA_APP_ID")
+adzuna_app_key = os.getenv("ADZUNA_APP_KEY")
+yelp_api_key = os.getenv("YELP_API_KEY")
+
+
 url = "https://api.adzuna.com/v1/api/jobs/us/search/1"
 
 job_title = input("Enter the job title you're looking for: ")
@@ -8,8 +18,8 @@ location = input("Enter the location (e.g., city or state): ")
 
 
 params = {
-    "app_id": "08e49799",
-    "app_key": "7a9887c1e3f68f97dd4e7bc4587a5a08",
+     "app_id": adzuna_app_id,
+    "app_key": adzuna_app_key,
     "results_per_page": 20,
     "what": job_title,
     "where": location,
@@ -32,7 +42,7 @@ yelp_url = "https://api.yelp.com/v3/businesses/search"
 
 yelp_header = {
     "accept": "application/json",
-    "authorization": "Bearer lGhHfJ5rJl8nMrr0QLei61oKEm9yS--MZa9WUtadR1-X0qWjXtvBmGRUXKqbWGwEKq6SaBgS4D69fDbKswUSFuU7ZhkLEqnXICzv8zRvfYNi5ofrJ_FZc-hQwKHhZ3Yx"
+    "Authorization": f"Bearer {yelp_api_key}"
 }
 def search_yelp (organization, city):
     yelp_param = {
